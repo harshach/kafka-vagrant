@@ -4,12 +4,10 @@
 require 'uri'
 # Configuration
 
-# the URL from which to download the Storm distribution. The download will only take place
-# if the file is not already in the same directory as the Vagrantfile.
-# to supply a custom build, drop it next to the Vagrantfile and make sure the file name
-# matches the file in the URL.
 KAFKA_BOX_TYPE = "hashicorp/precise64"
 # end Configuration
+KAFKA_BROKER_COUNT = 3
+KAFKA_DISTRO_FILE = "kafka_2.10-0.8.2.1"
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -28,6 +26,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"] = "1024"
       #v.vmx["numvcpus"] = "2"
+    end
+  end
+
+  (1..KAFKA_BROKER_COUNT).each do |n|
+    config.vm.define "kafka#{n}" do |node|
+      ip = "192.168.202.#{3 + n}"
+      node.vm.network "private_network", ip: ip
+      node.vm.hostname = "kafka#{n}"
+      node.vm.provision "shell", inline: "apt-get update"
+      node.vm.provision "shell", path: "install-kafka.sh", args: [KAFKA_DISTRO_FILE, "localhost", "kafka#{n}.witzend.com", "kafka#{n}", "#{n}"]
+      node.vm.provision "shell", path: "config-supervisord.sh", args: "kafka"
+      node.vm.provision "shell", path: "start-supervisord.sh"
     end
   end
 

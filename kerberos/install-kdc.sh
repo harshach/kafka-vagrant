@@ -15,32 +15,26 @@ sh /vagrant/kerberos/new_realm.sh
 # Zookeeper (Will need one of these for each box in teh Zk ensamble)
 sudo /usr/sbin/kadmin.local -q 'addprinc -randkey zookeeper/zookeeper.witzend.com@WITZEND.COM'
 sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/zk.keytab  zookeeper/zookeeper.witzend.com@WITZEND.COM"
-# Nimbus
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey nimbus/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/storm.keytab nimbus/nimbus.witzend.com@WITZEND.COM"
-# UI
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey HTTP/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey HTTP/supervisor1.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey HTTP/supervisor2.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/http.keytab HTTP/nimbus.witzend.com@WITZEND.COM"
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/http.keytab HTTP/supervisor1.witzend.com@WITZEND.COM"
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/http.keytab HTTP/supervisor2.witzend.com@WITZEND.COM"
 
-# All UI and Supervisors
-sudo /usr/sbin/kadmin.local -q 'addprinc -pw storm storm@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q 'change_password -pw storm storm@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/storm.keytab storm@WITZEND.COM"
+# Kafka brokers
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey kafka/kafka1.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/kafka1.keytab kafka/kafka1.witzend.com@WITZEND.COM"
 
-# user to submit topologies
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser1/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser1.keytab testuser1/nimbus.witzend.com@WITZEND.COM"
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey kafka/kafka2.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/kafka2.keytab kafka/kafka2.witzend.com@WITZEND.COM"
 
-sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser2/nimbus.witzend.com@WITZEND.COM'
-sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser2.keytab testuser2/nimbus.witzend.com@WITZEND.COM"
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey kafka/kafka3.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/kafka3.keytab kafka/kafka3.witzend.com@WITZEND.COM"
+
+# user to produce/consumer
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser1/kafka1.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser1.keytab testuser1/kafka1.witzend.com@WITZEND.COM"
+
+sudo /usr/sbin/kadmin.local -q 'addprinc -randkey testuser2/kafka1.witzend.com@WITZEND.COM'
+sudo /usr/sbin/kadmin.local -q "ktadd -k /tmp/testuser2.keytab testuser2/kafka1.witzend.com@WITZEND.COM"
 
 mkdir /vagrant/keytabs
-cp /tmp/storm.keytab /vagrant/keytabs/
+cp /tmp/kafka*.keytab /vagrant/keytabs/
 cp /tmp/zk.keytab /vagrant/keytabs/
-cp /tmp/http.keytab /vagrant/keytabs/
 cp /tmp/testuser1.keytab /vagrant/keytabs/
 cp /tmp/testuser2.keytab /vagrant/keytabs/

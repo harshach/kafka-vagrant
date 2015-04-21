@@ -14,9 +14,9 @@ $TTL	86400
 @	IN	NS	zookeeper.witzend.com.
 
 zookeeper IN A 192.168.202.3
-nimbus IN A 192.168.202.4
-supervisor1 IN A 192.168.202.5
-supervisor2 IN A 192.168.202.6
+kafka1 IN A 192.168.202.4
+kafka2 IN A 192.168.202.5
+kafka3 IN A 192.168.202.6
 kdc IN A 192.168.202.3
 
 _kerberos._udp.WITZEND.COM.         IN  SRV   0  0   88  kdc.witzend.com.

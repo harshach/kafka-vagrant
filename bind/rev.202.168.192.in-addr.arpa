@@ -12,7 +12,7 @@ $TTL	604800
 @	IN	NS	zookeeper.
 3	IN	PTR	zookeeper.witzend.com.
 
-4 IN PTR nimbus.witzend.com.
-5 IN PTR supervisor1.witzend.com.
-6 IN PTR supervisor2.witzend.com.
+4 IN PTR kafka1.witzend.com.
+5 IN PTR kafka2.witzend.com.
+6 IN PTR kafka3.witzend.com.
 20 IN PTR kdc.witzend.com.

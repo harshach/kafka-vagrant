@@ -5,6 +5,7 @@ cp /vagrant/kerberos/krb5.conf /etc/
 cp /vagrant/resolvconf_base.txt /etc/resolvconf/resolv.conf.d/base
 cp /vagrant/dhclient.conf /etc/dhcp/
 resolvconf -u
+cp /vagrant/configs/hosts /etc/hosts
 /etc/init.d/networking restart
 
 

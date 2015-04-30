@@ -6,8 +6,8 @@ require 'uri'
 
 KAFKA_BOX_TYPE = "hashicorp/precise64"
 # end Configuration
-KAFKA_BROKER_COUNT = 3
-KAFKA_DISTRO_FILE = "kafka_2.10-0.8.2.1"
+KAFKA_BROKER_COUNT = 2
+KAFKA_DISTRO_FILE = "kafka_2.10-0.8.3-SNAPSHOT"
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"

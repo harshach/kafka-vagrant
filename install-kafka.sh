@@ -27,6 +27,7 @@ chown kafka:kafka /etc/kafka
 
 cp /vagrant/configs/server$5.properties /usr/share/kafka/config/server.properties
 cp /vagrant/configs/kafka_jaas$5.conf /usr/share/kafka/config/kafka_jaas.conf
+cp /vagrant/configs/kafka-run-class.sh /usr/share/kafka/bin/
 
 echo "export KAFKA_KERBEROS_PARAMS=\"-Djava.security.auth.login.config=/usr/share/kafka/config/kafka_jaas.conf\"" >> /usr/share/kafka/config/kafka-env.sh
 chown kafka:kafka /usr/share/kafka/config/kafka-env.sh

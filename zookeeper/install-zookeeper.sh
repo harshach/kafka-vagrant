@@ -8,7 +8,7 @@ resolvconf -u
 groupadd zookeeper
 useradd --gid zookeeper --home-dir /home/zookeeper --create-home --shell /bin/bash zookeeper
 
-apt-get --yes install openjdk-7-jdk krb5-user
+apt-get --yes install openjdk-7-jdk
 
 wget -q http://mirror.nexcess.net/apache/zookeeper/stable/zookeeper-3.4.6.tar.gz
 
@@ -20,7 +20,7 @@ cp /vagrant/zookeeper/zookeeper.conf /etc/init/
 
 cp /vagrant/zookeeper/java.env /usr/share/zookeeper/conf/
 cp /vagrant/zookeeper/zoo.cfg /usr/share/zookeeper/conf/
-cp /vagrant/zookeeper/jaas.conf /usr/share/zookeeper/conf/
+
 
 chown -R zookeeper:zookeeper /usr/share/zookeeper-3.4.6
 

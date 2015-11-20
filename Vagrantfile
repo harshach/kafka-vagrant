@@ -6,8 +6,8 @@ require 'uri'
 
 KAFKA_BOX_TYPE = "hashicorp/precise64"
 # end Configuration
-KAFKA_BROKER_COUNT = 2
-KAFKA_DISTRO_FILE = "kafka_2.10-0.8.3-SNAPSHOT"
+KAFKA_BROKER_COUNT = 1
+KAFKA_DISTRO_FILE = "kafka_2.11-0.9.0.0"
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -21,7 +21,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.hostname = "zookeeper"
     node.vm.provision "shell", inline: "apt-get update"
     node.vm.provision "shell", path: "bind/install-bind.sh"
-    node.vm.provision "shell", path: "kerberos/install-kdc.sh"
     node.vm.provision "shell", path: "zookeeper/install-zookeeper.sh"
     node.vm.provider "vmware_fusion" do |v|
       v.vmx["memsize"] = "1024"
